@@ -1,8 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ShieldCheck, Truck, RotateCcw, BadgeCheck } from "lucide-react";
 import { Page, ProductCard } from "@/components/Layout";
-import { products } from "@/lib/products";
-import hero from "@/assets/n2.jpg";
+import { products, formatPKR } from "@/lib/products";
 
 export const Route = createFileRoute("/")({
   head: () => ({
