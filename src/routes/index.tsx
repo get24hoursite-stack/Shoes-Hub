@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ShieldCheck, Truck, RotateCcw, BadgeCheck } from "lucide-react";
 import { Page, ProductCard } from "@/components/Layout";
-import { products, formatPKR } from "@/lib/products";
+import { products } from "@/lib/products";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,9 +31,9 @@ function Index() {
               <a href="#nike" className="rounded-full border border-border px-8 py-4 text-sm font-bold uppercase tracking-widest text-foreground transition hover:border-primary">Explore</a>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="absolute inset-0 rounded-full bg-primary/25 blur-3xl" />
-            <div className="relative space-y-4">
+            <div className="relative min-w-0 space-y-4">
               <p className="text-center text-xs font-bold uppercase tracking-[0.35em] text-primary">Adidas</p>
               <MarqueeRow items={adidas} anim="marquee" />
               <p className="pt-2 text-center text-xs font-bold uppercase tracking-[0.35em] text-foreground/80">Nike</p>
@@ -78,17 +78,11 @@ function Section({ id, title, subtitle, items }: { id: string; title: string; su
 function MarqueeRow({ items, anim }: { items: typeof products; anim: "marquee" | "marquee-reverse" }) {
   const strip = [...items, ...items, ...items];
   return (
-    <div className="overflow-hidden rounded-3xl border border-border bg-card/60 py-3 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
-      <div className={`flex w-max gap-4 hover:[animation-play-state:paused] ${anim === "marquee" ? "animate-[marquee_28s_linear_infinite]" : "animate-[marquee-reverse_28s_linear_infinite]"}`}>
+    <div className="overflow-hidden py-3">
+      <div className={`flex w-max gap-4 hover:[animation-play-state:paused] ${anim === "marquee" ? "animate-[marquee_38s_linear_infinite]" : "animate-[marquee-reverse_38s_linear_infinite]"}`}>
         {[...strip, ...strip].map((p, i) => (
-          <Link key={p.id + i} to="/product/$id" params={{ id: p.id }} className="w-36 shrink-0 md:w-52">
-            <div className="overflow-hidden rounded-2xl bg-background">
-              <img src={p.image} alt={p.name} className="aspect-square w-full object-cover" loading="lazy" />
-            </div>
-            <div className="mt-2 px-1">
-              <p className="truncate text-xs font-semibold md:text-sm">{p.name}</p>
-              <p className="text-xs font-bold text-primary md:text-sm">{formatPKR(p.price)}</p>
-            </div>
+          <Link key={p.id + i} to="/product/$id" params={{ id: p.id }} className="w-48 shrink-0 md:w-72">
+            <img src={p.image} alt={p.name} className="aspect-square w-full rounded-2xl object-cover" loading="lazy" />
           </Link>
         ))}
       </div>
