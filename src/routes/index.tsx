@@ -74,3 +74,24 @@ function Section({ id, title, subtitle, items }: { id: string; title: string; su
     </section>
   );
 }
+
+function MarqueeRow({ items, anim }: { items: typeof products; anim: "marquee" | "marquee-reverse" }) {
+  const strip = [...items, ...items, ...items];
+  return (
+    <div className="overflow-hidden rounded-3xl border border-border bg-card/60 py-3 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+      <div className={`flex w-max gap-4 hover:[animation-play-state:paused] ${anim === "marquee" ? "animate-[marquee_28s_linear_infinite]" : "animate-[marquee-reverse_28s_linear_infinite]"}`}>
+        {[...strip, ...strip].map((p, i) => (
+          <Link key={p.id + i} to="/product/$id" params={{ id: p.id }} className="w-36 shrink-0 md:w-52">
+            <div className="overflow-hidden rounded-2xl bg-background">
+              <img src={p.image} alt={p.name} className="aspect-square w-full object-cover" loading="lazy" />
+            </div>
+            <div className="mt-2 px-1">
+              <p className="truncate text-xs font-semibold md:text-sm">{p.name}</p>
+              <p className="text-xs font-bold text-primary md:text-sm">{formatPKR(p.price)}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
