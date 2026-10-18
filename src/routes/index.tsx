@@ -32,8 +32,13 @@ function Index() {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute inset-10 rounded-full bg-primary/30 blur-3xl" />
-            <img src={hero} alt="Air Jordan 1 High" width={1024} height={1024} className="relative animate-float rounded-3xl" />
+            <div className="absolute inset-0 rounded-full bg-primary/25 blur-3xl" />
+            <div className="relative space-y-4">
+              <p className="text-center text-xs font-bold uppercase tracking-[0.35em] text-primary">Adidas</p>
+              <MarqueeRow items={adidas} anim="marquee" />
+              <p className="pt-2 text-center text-xs font-bold uppercase tracking-[0.35em] text-foreground/80">Nike</p>
+              <MarqueeRow items={nike} anim="marquee-reverse" />
+            </div>
           </div>
         </div>
       </section>
